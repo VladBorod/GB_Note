@@ -19,7 +19,7 @@ def start():
             com.add_note()
         elif user_input == '6':
             com.show("all")
-            com.sel_notes()
+            com.del_notes()
         else:
             print("Note journal work break")
             break

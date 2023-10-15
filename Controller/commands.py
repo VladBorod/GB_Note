@@ -49,3 +49,38 @@ def show(txt):
 
         else:
             print("Journal is empty")
+
+def del_notes():
+    id = input("enter ID of note you want to delete: ")
+    array_notes = lF.read_file()
+    flag = False
+
+    for i in array_notes:
+        if id == Models.Note.Note.get_id(i):
+            array_notes.remove(i)
+            flag = True
+
+    if flag:
+        wF.write_file(array_notes, 'a')
+        print("Note with id: ", id, "deleted successfully")
+    else:
+        print("id not found!")
+
+def change_note():
+    id = input("Enter id of note you wish to change: ")
+    array_notes = lF.read_file()
+    flag = True
+    array_notes_new = []
+    for i in array_notes:
+        if id == Models.Note.Note.get_id(i):
+            i.title = input("Change title: \n")
+            i.body = input("Change note: \n")
+            Models.Note.Note.set_date(i)
+            logic = False
+        array_notes_new.append(i)
+
+    if flag:
+        wF.write_file(array_notes_new, 'a')
+        print("Note with id: ", id, " successfully changed!")
+    else:
+        print("there is no such id!")
